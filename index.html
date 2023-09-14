@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Menu Navigation with Image Display</title>
+    <style>
+        /* Style the navigation buttons */
+        .menu-button {
+            display: inline-block;
+            padding: 20px 50px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            margin-right: 30px;
+            cursor: pointer;
+        }
+
+        /* Style the buttons on hover */
+        .menu-button:hover {
+            background-color: #3336FF;
+        }
+
+        /* Highlight the active button */
+        .active {
+            background-color: #3336FF;
+        }
+
+        /* Style for the displayed image */
+        #image-container {
+            margin-top: 20px;
+        }
+
+        #displayed-image {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body style="background-color:grey">
+
+		<script>
+			let url = window.location.search;
+			console.log(url);	
+
+			const urlParams = new URL(location.href).searchParams;
+
+			const room = urlParams.get('roomnumber');
+			console.log(room)
+			
+			document.write("URL=");		
+			document.write(location.href,'<br>');
+			document.write("ROOM NUMBER=");
+			document.write(room,'<br>');
+			document.write('<br>');
+		</script>
+
+	
+    <div class="menu">
+        <!-- Define your navigation buttons with data attributes -->
+        <button class="menu-button active" data-index="0">Button 1</button>
+        <button class="menu-button" data-index="1">Button 2</button>
+        <button class="menu-button" data-index="2">Button 3</button>
+        <button class="menu-button" data-index="3">Button 4</button>
+    </div>
+
+    <!-- Container to display the image -->
+    <div id="image-container">
+        <img id="displayed-image" src="https://cdn.pixabay.com/photo/2017/06/28/10/53/board-2450236_1280.jpg" alt="No Image">
+    </div>
+
+    <script>
+   	
+        const buttons = document.querySelectorAll('.menu-button');
+        const displayedImage = document.getElementById('displayed-image');
+        let currentIndex = 0;
+
+        // Function to add the "active" class to the currently selected button
+        function setActiveButton() {
+            buttons.forEach(button => button.classList.remove('active'));
+            buttons[currentIndex].classList.add('active');
+        }
+
+        // Event listener for handling keyboard arrow key navigation
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight' && currentIndex < buttons.length - 1) {
+                currentIndex++;
+                setActiveButton();
+                updateImage();
+            } else if (event.key === 'ArrowLeft' && currentIndex > 0) {
+                currentIndex--;
+                setActiveButton();
+                updateImage();
+            }
+        });
+
+        // Event listener for button click to update the displayed image
+        buttons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                currentIndex = index;
+                setActiveButton();
+                updateImage();
+            });
+        });
+
+        // Function to update the displayed image based on the current index
+        function updateImage() {
+            const images = ['https://cdn.pixabay.com/photo/2017/06/28/10/53/board-2450236_1280.jpg',
+             'https://cdn.pixabay.com/photo/2017/09/10/18/25/question-2736480_1280.jpg', 
+             'https://cdn.pixabay.com/photo/2015/03/12/12/43/test-670091_1280.png', 
+             'https://cdn.pixabay.com/photo/2014/06/03/19/38/board-361516_1280.jpg'];
+            displayedImage.src = images[currentIndex];
+            displayedImage.alt = `Sample Image ${currentIndex + 1}`;
+        }
+
+        // Initial highlighting of the active button and image display
+        setActiveButton();
+        updateImage();
+    </script>
+</body>
+</html>
