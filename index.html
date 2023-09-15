@@ -67,7 +67,7 @@
 
     <!-- Container to display the image -->
     <div id="image-container">
-        <img id="displayed-image" src="img/menu1.jpg" alt="No Image">
+        <img id="displayed-image" src="./img/MENU.jpg" alt="No Image">
     </div>
 
     <script>
@@ -106,10 +106,10 @@
 
         // Function to update the displayed image based on the current index
         function updateImage() {
-            const images = ['img/menu1.jpg',
-             'img/menu2.jpg', 
-             'img/menu3.jpg', 
-             'img/menu4.jpg'];
+            const images = ['./img/MENU1.jpg',
+             './img/MENU2.jpg', 
+             'img/MENU3.jpg', 
+             'img/MENU4.jpg'];
             displayedImage.src = images[currentIndex];
             displayedImage.alt = `Sample Image ${currentIndex + 1}`;
         }
